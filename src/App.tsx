@@ -1,10 +1,10 @@
-import { useEffect } from "react"
+import { FC, useEffect } from "react"
 import Login from "./components/Login"
 import Spotify from "./components/Spotify/Spotify";
 import { useStateProvider } from "./utils/StateProvider";
-import { reducerCases } from "./utils/constants.js"
+import { reducerCases } from "@utils/reducer"
 
-const App = () => {
+const App:FC = () => {
   const [{ token }, dispatch] = useStateProvider();
 
   useEffect(()=>{
@@ -12,7 +12,7 @@ const App = () => {
     if(hash){
       const accessToken = hash.substring(1).split("&")[0].split("=")[1];
       if(accessToken){
-        dispatch({ type: reducerCases.SET_TOKEN, accessToken});
+        dispatch({ type: reducerCases.SET_TOKEN, payload: accessToken});
       }
     }
   },[dispatch, token]);

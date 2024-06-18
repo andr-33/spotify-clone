@@ -1,4 +1,5 @@
 import { Home, Search, Library } from 'lucide-react'
+import Playlists from './Playlists/Playlists';
 
 const Sidebar = () =>{
     return(
@@ -26,6 +27,8 @@ const Sidebar = () =>{
                     </li>
                 </ul>
             </div>
+            <hr className='bg-[#b3b3b3] mx-1'/>
+            <Playlists />
         </div>
     );
 };
