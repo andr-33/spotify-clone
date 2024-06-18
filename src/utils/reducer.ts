@@ -4,9 +4,21 @@ export const reducerCases = {
     SET_PLAYLIST_ID: "SET_PLAYLIST_ID",
 };
 
+export interface PlaylistCover{
+    height: number;
+    width: number;
+    url: string;
+}
+
+export interface Playlist {
+    name: string;
+    id: string;
+    images: Array<PlaylistCover>;
+}
+
 export interface State {
     token: string | null;
-    playlists: Array<any>;
+    playlists: Array<Playlist>;
     selectedPlaylistId: string | null;
 }
 
@@ -22,7 +34,7 @@ export const initialState: State = {
 };
 
 type SetTokenAction = Action<typeof reducerCases.SET_TOKEN, string>
-type SetPlaylistsAction = Action<typeof reducerCases.SET_PLAYLISTS, Array<any>>
+type SetPlaylistsAction = Action<typeof reducerCases.SET_PLAYLISTS, Array<Playlist>>
 type SetPlaylistIdAction = Action<typeof reducerCases.SET_PLAYLIST_ID, string>
 
 export type ActionTypes = SetTokenAction | SetPlaylistsAction | SetPlaylistIdAction

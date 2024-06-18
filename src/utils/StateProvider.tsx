@@ -16,4 +16,10 @@ export const StateProvider: FC<StateProviderProps> = ({children, reducer, initia
     </StateContext.Provider>
 );
 
-export const useStateProvider = () => useContext(StateContext);
+export const useStateProvider = (): [State, Dispatch<ActionTypes>] =>{
+    const context = useContext(StateContext);
+    if(!context){
+        throw new Error('useStateProvider must be used within a StateProvider');
+    }
+    return context;
+};

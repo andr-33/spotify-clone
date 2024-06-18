@@ -1,5 +1,5 @@
 import { useStateProvider } from '@utils/StateProvider';
-import { reducerCases } from '@utils/reducer';
+import { reducerCases, Playlist } from '@utils/reducer';
 import { FC, useEffect } from 'react';
 import axios from 'axios';
 
@@ -19,8 +19,8 @@ const Playlists:FC = () =>{
             );
 
             const { items } = res.data;
-            const playlistsData = items.map(({ name, id }) => {
-                return { name, id }
+            const playlistsData: Array<Playlist> = items.map(({ name, id, images }:Playlist) => {
+                return { name, id, images }
             });
             dispatch({ type: reducerCases.SET_PLAYLISTS, payload: playlistsData});
         };
@@ -32,16 +32,20 @@ const Playlists:FC = () =>{
     }; 
 
     return(
-        <div className='text-[#b3b3b3] h-full overflow-hidden'>
-            <ul className='list-none felx flex-col p-4 h-[55vh] max-h-full overflow-auto'>
-                {playlists.map(({name, id})=>{
+        <div className='text-white h-full overflow-hidden'>
+            <div className='list-none felx flex-col mt-2 py-2 px-2 h-[55vh] max-h-full overflow-auto scrollbar'>
+                {playlists.map(({name, id, images})=>{
                     return(
-                        <li className='cursor-pointer pb-3 transition-colors hover:text-white' key={id} onClick={()=> handleChangeCurrentPlaylist(id)}>
-                            {name}
-                        </li>
+                        <div key={id} 
+                          className='flex w-full flex-row items-center rounded mb-2 cursor-pointer transition-colors hover:bg-stone-700' 
+                          onClick={()=> handleChangeCurrentPlaylist(id)}
+                         >
+                            <img src={images[2].url} width={images[2].width} height={images[2].height} className='rounded scale-75'/>
+                            <span className='ml-2'>{name}</span>
+                        </div>
                     )
                 })}
-            </ul>
+            </div>
         </div>
     );
 };

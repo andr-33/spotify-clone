@@ -1,7 +1,8 @@
 import { Home, Search, Library } from 'lucide-react'
 import Playlists from './Playlists/Playlists';
+import { FC } from 'react';
 
-const Sidebar = () =>{
+const Sidebar:FC = () =>{
     return(
         <div className="bg-black flex flex-col h-full w-full text-[#b3b3b3]">
             <div className="flex flex-col ">
