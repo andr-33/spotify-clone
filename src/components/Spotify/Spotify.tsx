@@ -3,13 +3,20 @@ import Body from "./Body/Body";
 import Footer from "./Footer/Footer";
 import Navbar from "./Navbar/Navbar";
 import Sidebar from "./Sidebar/Sidebar";
-import { useEffect } from "react";
+import { useEffect, useRef, useState } from "react";
 import axios from "axios";
 import { reducerCases } from "@utils/reducer";
 
 const Spotify = () =>{
     const [{ token }, dispatch] = useStateProvider();
-    
+    const [navBackground, setNavBackground] = useState(false);
+    const mainRef = useRef<HTMLDivElement>(null);
+
+    const mainScrolled = () =>{
+        if(mainRef.current){
+            mainRef.current?.scrollTop >= 30 ? setNavBackground(true) : setNavBackground(false);
+        }
+    };
 
     useEffect(()=>{
         const getUserData = async () =>{
@@ -36,9 +43,9 @@ const Spotify = () =>{
         <div className="w-screen h-screen overflow-hidden grid grid-rows-[85vh_15vh]">
             <div className="h-full w-full grid overflow-hidden grid-cols-[15vw_85vw] bg-spotify-lg bg-[#205764]">
                 <Sidebar />
-                <div className="h-full w-full overflow-auto">
-                    <Navbar />
-                    <div>
+                <div className="h-full w-full overflow-auto" ref={mainRef} onScroll={mainScrolled}>
+                    <Navbar navBackground={navBackground}/>
+                    <div className="">
                         <Body />
                     </div>
                 </div>

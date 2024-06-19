@@ -7,7 +7,13 @@ export default {
   theme: {
     extend: {
       backgroundImage:{
-        'spotify-lg': "linear-gradient(transparent, rgba(0, 0, 0, 1))"
+        'spotify-lg': "linear-gradient(transparent, rgba(0, 0, 0, 1))",
+      },
+      backgroundColor:{
+        'navbar': 'rgba(0,0,0,0.7)'
+      },
+      transitionProperty:{
+        'width': 'width',
       },
     },
   },
