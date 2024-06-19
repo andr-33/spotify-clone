@@ -1,10 +1,11 @@
 import { useStateProvider } from '@utils/StateProvider';
 import { reducerCases, Playlist } from '@utils/reducer';
-import { FC, useEffect } from 'react';
+import { FC, useEffect, useState } from 'react';
 import axios from 'axios';
 
 const Playlists:FC = () =>{
     const [{ token, playlists }, dispatch] = useStateProvider();
+    const [showScrollbar, SetShowScrollbar] = useState(false);
 
     useEffect(()=>{
         const getPlaylistData = async () => {
@@ -31,17 +32,24 @@ const Playlists:FC = () =>{
         dispatch({ type: reducerCases.SET_PLAYLIST_ID, payload: selectedPlaylistId });
     }; 
 
+    const handleOverflow = () =>{
+        SetShowScrollbar(prev => !prev);
+    };
+
     return(
-        <div className='text-white h-full overflow-hidden'>
-            <div className='list-none felx flex-col mt-2 py-2 px-2 h-[55vh] max-h-full overflow-auto scrollbar'>
+        <div className={`text-white h-full my-1 ${showScrollbar ? 'overflow-auto scrollbar':'overflow-hidden'}`}
+          onMouseEnter={handleOverflow}
+          onMouseLeave={handleOverflow}
+        >
+            <div className='list-none felx flex-col px-2 h-[55vh]'>
                 {playlists.map(({name, id, images})=>{
                     return(
                         <div key={id} 
                           className='flex w-full flex-row items-center rounded mb-2 cursor-pointer transition-colors hover:bg-stone-700' 
                           onClick={()=> handleChangeCurrentPlaylist(id)}
-                         >
+                        >
                             <img src={images[2].url} width={images[2].width} height={images[2].height} className='rounded scale-75'/>
-                            <span className='ml-2'>{name}</span>
+                            <span className='ml-1'>{name}</span>
                         </div>
                     )
                 })}
