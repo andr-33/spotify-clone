@@ -8,7 +8,7 @@ export default {
     extend: {
       backgroundImage:{
         'spotify-lg': "linear-gradient(transparent, rgba(0, 0, 0, 1))"
-      }
+      },
     },
   },
   plugins: [
