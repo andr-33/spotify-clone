@@ -43,7 +43,7 @@ export const initialState: State = {
     userData: null
 };
 
-type SetTokenAction = Action<typeof reducerCases.SET_TOKEN, string>;
+type SetTokenAction = Action<typeof reducerCases.SET_TOKEN, string|null>;
 type SetPlaylistsAction = Action<typeof reducerCases.SET_PLAYLISTS, Array<Playlist>>;
 type SetPlaylistIdAction = Action<typeof reducerCases.SET_PLAYLIST_ID, string>;
 type SetUserDataAction = Action<typeof reducerCases.SET_USER_DATA, User>;
