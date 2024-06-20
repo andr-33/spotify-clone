@@ -2,6 +2,7 @@ export const reducerCases = {
     SET_TOKEN: "SET_TOKEN",
     SET_PLAYLISTS: "SET_PLAYLISTS",
     SET_PLAYLIST_ID: "SET_PLAYLIST_ID",
+    SET_PLAYLIST: "SET_PLAYLIST",
     SET_USER_DATA: "SET_USER_DATA"
 };
 
@@ -29,6 +30,7 @@ export interface State {
     playlists: Array<Playlist>;
     selectedPlaylistId: string | null;
     userData: User | null;
+    selectedPlaylist: Playlist | null;
 }
 
 interface Action<T, P>{
@@ -40,15 +42,17 @@ export const initialState: State = {
     token: null,
     playlists: [],
     selectedPlaylistId: null,
-    userData: null
+    userData: null,
+    selectedPlaylist: null
 };
 
 type SetTokenAction = Action<typeof reducerCases.SET_TOKEN, string|null>;
 type SetPlaylistsAction = Action<typeof reducerCases.SET_PLAYLISTS, Array<Playlist>>;
+type SetPlaylistAction = Action<typeof reducerCases.SET_PLAYLIST, Playlist>
 type SetPlaylistIdAction = Action<typeof reducerCases.SET_PLAYLIST_ID, string>;
 type SetUserDataAction = Action<typeof reducerCases.SET_USER_DATA, User>;
 
-export type ActionTypes = SetTokenAction | SetPlaylistsAction | SetPlaylistIdAction | SetUserDataAction
+export type ActionTypes = SetTokenAction | SetPlaylistsAction | SetPlaylistAction | SetPlaylistIdAction | SetUserDataAction
 
 const reducer = (state: State, action: ActionTypes) =>{
     switch(action.type){
@@ -61,6 +65,11 @@ const reducer = (state: State, action: ActionTypes) =>{
             return{
                 ...state,
                 playlists: action.payload,
+            };
+        case reducerCases.SET_PLAYLIST:
+            return{
+                ...state,
+                selectedPlaylist: action.payload
             };
         case reducerCases.SET_PLAYLIST_ID:
             return{
