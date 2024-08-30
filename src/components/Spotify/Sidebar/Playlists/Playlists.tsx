@@ -48,7 +48,7 @@ const Playlists:FC = () =>{
                           className='flex w-full flex-row items-center rounded mb-2 cursor-pointer transition-colors hover:bg-stone-700' 
                           onClick={()=> handleChangeCurrentPlaylist(id)}
                         >
-                            <img src={images[2].url} width={images[2].width} height={images[2].height} className='rounded scale-75'/>
+                            <img src={images[2]?.url} width={images[2]?.width} height={images[2]?.height} className='rounded scale-75'/>
                             <span className='ml-1'>{name}</span>
                         </div>
                     )

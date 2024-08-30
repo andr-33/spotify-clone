@@ -21,10 +21,10 @@ interface Playing{
     image: Image
 }
 
-interface Track{
+export interface Track{
     id: string;
     name: string;
-    artists: Array<any>;
+    artists: Array<string>;
     image: Image;
     duration: number;
     album: string;
